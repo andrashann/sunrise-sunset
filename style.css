@@ -1,0 +1,63 @@
+* {
+    font-family: 'Crimson Text', serif;
+}
+
+.container {
+  padding-top: 40px;
+}
+
+.smaller {
+  font-size: small;
+}
+
+#map, #chart { 
+  height: 100%;
+  min-height: 400px; 
+  width: 100%;
+}
+
+#messages {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+#error {
+  color: rgb(168, 26, 26);
+  border: rgb(255, 83, 83);
+  background: rgb(255, 206, 206);
+}
+
+#loading {
+  border: rgb(255, 228, 75);
+  background: rgb(255, 242, 167);
+}
+
+#error, #loading {
+  border-width: 2px ;
+  border-style: solid;
+  text-align: center;
+  display: none;
+  padding: 8px;
+}
+
+#loading img{
+  height: 1em; 
+  vertical-align: middle;
+}
+
+#footer{
+  padding-top: 25px;
+  text-align: center;
+}
+
+.text {
+  display: none;
+}
+
+.loc {
+  display: none;
+}
+/**/

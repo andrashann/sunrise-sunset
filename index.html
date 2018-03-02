@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sunrise, sunset</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="crossorigin=""></script>
+  <script src="https://cdn.rawgit.com/mourner/suncalc/b08d1f6f/suncalc.js"></script>
+  <script src="https://cdn.rawgit.com/datejs/Datejs/a7239957/build/date.js"></script>
+
+  <!-- Load c3.css -->
+  <link href="https://cdn.rawgit.com/c3js/c3/a9c598ec/c3.min.css" rel="stylesheet">
+
+  <!-- Load d3.js and c3.js -->
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://cdn.rawgit.com/c3js/c3/a9c598ec/c3.min.js"></script>
+
+
+
+</head>
+<body>
+<div id="messages">
+  <p id="error">
+
+    </p>
+    <p id="loading">
+      Loading <img src="load.gif"/>
+    </p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <h1>Sunrise, sunset</h1>
+        <p>
+          I grew up in Budapest and moved to the Netherlands a few years ago. 
+          I could not ignore the fact that the Sun has very different patterns: it rises later and sets later here than in Budapest. 
+          However, this difference is not uniform: my feeling was that the sun rises <em>much</em> later and sets about the same time during the winter.
+          I saw the inverse in the summer: Dutch summer evenings are <em>much</em> longer, but dawn does not lag behind that much.
+        </p>
+        <p>
+          This page lets you compare the dawn/dusk pattern of two arbitrary locations: just click the map to move a marker to your desired location.
+          Hover over the graph to see exact dawn/dusk times.
+        </p>
+
+        <p class="text">Replace me!!</p>
+        <p class="loc">loc</p>
+
+    </div>
+  </div>
+  <div class="row" id="content">
+    <div class="col-lg-7">
+      <div id="chart"></div>
+    </div>
+    <div class="col-lg-5">
+      <div id="map"></div>
+    </div>
+  </div>
+  <div id="footer" class="row">
+      <div class="col">
+        <p class="smaller">&copy; András Hann 2018 <br /> created using
+          <a href="https://getbootstrap.com/">Bootstrap</a>, 
+          <a href="https://timezonedb.com">timezonedb.com</a>,
+          <a href="https://nominatim.openstreetmap.org">Nominatim</a>,
+          <a href="https://github.com/mourner/suncalc">SunCalc</a>,
+          <a href="https://github.com/datejs/Datejs">Datejs</a>,
+          <a href="http://c3js.org/">C3.js</a>, 
+          <a href="http://leafletjs.com/">Leaflet</a>,
+          and <a href ="https://github.com/pointhi/leaflet-color-markers">leaflet-color-markers</a>
+        </p>
+      </div>
+  </div>
+</div>
+<script src="timezones.js"></script>
+<!-- <script src="calculations.js"></script> -->
+<script src="script.js"></script>
+</body>
+</html>
