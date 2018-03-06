@@ -1,6 +1,8 @@
 # sunrise-sunset
 A static site to compare sunrise/sunset times of to places on Earth
 
+View the site [here](http://hann.io/sunrise-sunset)
+
 ## What's this?
 
 I grew up in Budapest and moved to the Netherlands a few years ago. I could not ignore the fact that the Sun has very different patterns: it rises later and sets later here than in Budapest. However, this difference is not uniform: my feeling was that the sun rises much later and sets about the same time during the winter. I saw the inverse in the summer: Dutch summer evenings are much longer, but dawn does not lag behind that much.
