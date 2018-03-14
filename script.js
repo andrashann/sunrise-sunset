@@ -55,8 +55,8 @@ function getTimeZoneData(lat, lng, marker){
 }
 
 function onTZAjaxError(){
-  $("#error").text('It looks like we could not get the time zone information of the location.'+
-    'This might happen when too many people are looking at the page at the same time or you clicked on a very remote area.'+
+  $("#error").text('It looks like we could not get the time zone information of the location. '+
+    'This might happen when too many people are looking at the page at the same time or you clicked on a very remote area. '+
     'Please try again in a moment or try a different location.');
   $("#error").slideDown()
 }
