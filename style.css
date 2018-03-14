@@ -60,4 +60,9 @@
 .loc {
   display: none;
 }
-/**/
+
+.form-check {
+  font-size: 12px;
+  margin-left: 20px;
+  padding-bottom: 8px;
+}
