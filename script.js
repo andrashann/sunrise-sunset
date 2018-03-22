@@ -4,6 +4,14 @@ let markers = {0:{}, 1:{}};
 // Getting data
 //-----------------------------------------
 
+function shiftArrayByHalf(a){
+  return (
+    a
+      .slice(Math.ceil(a.length/2),a.length+1)
+      .concat(a.slice(0,Math.ceil(a.length/2)))
+  );
+}
+
 let isLoading = false;
 
 //---- General data loading query
@@ -198,6 +206,15 @@ function calculateSunriseSunsetTimes(m){
       //console.log(Math.abs(dusk[dusk.length - 3] - dusk[dusk.length - 1]));
   }
 
+  if ($('#shiftSH').prop('checked') && marker.lat < 0) {
+    results['dawn'] = shiftArrayByHalf(results['dawn']);
+    results['dusk'] = shiftArrayByHalf(results['dusk']);
+    marker['shifted'] = 1;
+  }
+
+  marker['dawn'] = results['dawn']
+  marker['dusk'] = results['dusk']
+  
   if (m == 0){
       var d1 = ['data1'].concat(results['dawn']);
       var d2 = ['data2'].concat(results['dusk']);
@@ -395,3 +412,43 @@ $(window).bind("load",function(){
   last_moved_marker = 0;
   onMapClick({'latlng': L.latLng(52.3702, 4.8952)});
 });
+
+$(document).ready(function(){
+  $('#shiftSH').on('change', function() {
+    let didSomethingChange; 
+    if (this.checked) {
+      [0, 1].forEach(m => {
+        var marker = markers[m];
+          if (marker.lat < 0 && !marker.shifted){
+            marker['dawn'] = shiftArrayByHalf(marker['dawn']);
+            marker['dusk'] = shiftArrayByHalf(marker['dusk']);
+            marker['shifted'] = 1;
+            didSomethingChange = true;
+          }
+      });
+    } else {
+      [0, 1].forEach(m => {
+        var marker = markers[m];
+          if (marker.lat < 0 && marker.shifted){
+            marker['dawn'] = shiftArrayByHalf(marker['dawn']);
+            marker['dusk'] = shiftArrayByHalf(marker['dusk']);
+            marker['shifted'] = 0;
+            didSomethingChange = true;
+          }
+      });
+    }
+
+    if(didSomethingChange){
+      chart.load({
+        columns: [
+            ['data1'].concat(markers[0]['dawn']),
+            ['data2'].concat(markers[0]['dusk']),
+            ['data3'].concat(markers[1]['dawn']),
+            ['data4'].concat(markers[1]['dusk'])
+        ]
+      });
+      chart.flush();
+    }
+});
+
+})
