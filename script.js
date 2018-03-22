@@ -51,7 +51,6 @@ function getTimeZoneData(lat, lng, marker){
       },
       error: function (xhr, ajaxOptions, thrownError) {
         onTZAjaxError();  
-        //$('.text').text(xhr.status + thrownError);
       },
       complete: function(){
         isLoading = false;
@@ -72,9 +71,6 @@ function onTZAjaxError(){
 function onTZAjaxSuccess(data, marker){
   $("#error").slideUp()
 
-  //var date = new Date(data["dstStart"] * 1000);
-  //$('.text').text(JSON.stringify(data));
-  //$('.text').text(date.toISOString());
   markers[marker]["tzinfo"] = data;
 
   processTimeZoneData(marker);
@@ -195,15 +191,12 @@ function calculateSunriseSunsetTimes(m){
           Math.abs(results['dawn'][results['dawn'].length - 3] - results['dawn'][results['dawn'].length - 1]) < 0.5 &&
           Math.abs(results['dawn'][results['dawn'].length - 2] - results['dawn'][results['dawn'].length - 1]) > 0.8){
               results['dawn'][results['dawn'].length - 2] = results['dawn'][results['dawn'].length - 1];
-              console.log('dawn fixed');
       }
       if (Math.abs(results['dusk'][results['dusk'].length - 3] - results['dusk'][results['dusk'].length - 4]) < 0.5 &&
           Math.abs(results['dusk'][results['dusk'].length - 3] - results['dusk'][results['dusk'].length - 1]) < 0.5 &&
           Math.abs(results['dusk'][results['dusk'].length - 2] - results['dusk'][results['dusk'].length - 1]) > 0.8){
               results['dusk'][results['dusk'].length - 2] = results['dusk'][results['dusk'].length - 1];
-              console.log('dusk fixed');
       }
-      //console.log(Math.abs(dusk[dusk.length - 3] - dusk[dusk.length - 1]));
   }
 
   if ($('#shiftSH').prop('checked') && marker.lat < 0) {
@@ -236,7 +229,6 @@ function calculateSunriseSunsetTimes(m){
 
 function getNominatimData(lat, lng, marker){
   var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+lng+"&zoom=18&addressdetails=1&accept-language=en";
-  //console.log(url);
   isLoading = true;
   $.ajax({
     type:"POST",
@@ -261,7 +253,6 @@ function getNominatimData(lat, lng, marker){
 }
 
 function onNominatimAjaxSuccess(data, marker, lat, lng){
-  //console.log(data["address"]);
   var location = '[unknown location]';
   var locationParts = ["city", "town", "village", "county", "state", "country"];
   locationParts.some(function(element){
@@ -378,9 +369,6 @@ L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ', {
     id: 'osm.humanitarian',
 }).addTo(map);
 
-map.on('moveend', function() {
-   //console.log(map.getCenter());
-});
 
 function onMapClick(e){
   if (last_moved_marker == 0) {
