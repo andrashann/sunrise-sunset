@@ -197,6 +197,19 @@ function calculateSunriseSunsetTimes(m){
           Math.abs(results['dusk'][results['dusk'].length - 2] - results['dusk'][results['dusk'].length - 1]) > 0.8){
               results['dusk'][results['dusk'].length - 2] = results['dusk'][results['dusk'].length - 1];
       }
+
+      // Don't draw a vertical line if we go over midnight with sunrise/sunet
+      var dawndiff = Math.abs(results['dawn'][results['dawn'].length - 1] - results['dawn'][results['dawn'].length - 2]);
+      var duskdiff = Math.abs(results['dusk'][results['dusk'].length - 1] - results['dusk'][results['dusk'].length - 2]);
+      if (dawndiff > 10 && results['dawn'][results['dawn'].length - 2] !== null) {
+        console.log( results['dawn'].length - 1  + ' set to null, because the diff is ' + duskdiff + ' orgiginal value was ' + results['dawn'][results['dawn'].length - 1]);
+        results['dawn'][results['dawn'].length - 2] = null;
+      }
+      if (duskdiff > 10 && results['dusk'][results['dusk'].length - 2] !== null) {
+        console.log( results['dusk'].length - 1  + ' set to null, because the diff is ' + duskdiff + ' orgiginal value was ' + results['dusk'][results['dusk'].length - 1]);
+        results['dusk'][results['dusk'].length - 2] = null;
+      }
+      
   }
 
   if ($('#shiftSH').prop('checked') && marker.lat < 0) {
