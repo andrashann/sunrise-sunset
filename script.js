@@ -387,28 +387,55 @@ L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ', {
 
 
 function onMapClick(e){
+  console.log(last_moved_marker);
   if (last_moved_marker == 0) {
     if (markers[1]["marker"]) {
       map.removeLayer(markers[1]["marker"]);
     }
-    markers[1]["marker"] = new L.Marker(e.latlng, {icon: orangeIcon}).addTo(map);
+    markers[1]["marker"] = new L.Marker(e.latlng, {icon: orangeIcon, draggable: true});
+    markers[1]["marker"].on('dragstart', function(e) {
+      map.off('click', onMapClickIfNotLoading);
+    });
+    markers[1]["marker"].on('dragend', function(e) {
+      getData(markers[1]["marker"]._latlng.lat, markers[1]["marker"]._latlng.lng, 1);
+      last_moved_marker = 1;
+      setTimeout(function() {
+        map.on('click', onMapClickIfNotLoading);
+      }, 100);
+    });
+    markers[1]["marker"].addTo(map);
+
     getData(e.latlng.lat, e.latlng.lng, 1);
     last_moved_marker = 1;
   } else {
     if (markers[0]["marker"]) {
       map.removeLayer(markers[0]["marker"]);
     }
-    markers[0]["marker"] = new L.Marker(e.latlng).addTo(map);
+    markers[0]["marker"] = new L.Marker(e.latlng, {draggable: true});
+    markers[0]["marker"].on('dragstart', function(e) {
+      map.off('click', onMapClickIfNotLoading);
+    });
+    markers[0]["marker"].on('dragend', function(e) {
+      getData(markers[0]["marker"]._latlng.lat, markers[0]["marker"]._latlng.lng, 0);
+      last_moved_marker = 0;
+      setTimeout(function() {
+        map.on('click', onMapClickIfNotLoading);
+      }, 100);
+    });
+    markers[0]["marker"].addTo(map);
+
     getData(e.latlng.lat, e.latlng.lng, 0);
     last_moved_marker = 0;
   }
 }
 
-map.on('click', function (e) {
+function onMapClickIfNotLoading(e){
   if (!isLoading){
     onMapClick(e);
   }
-});
+}
+
+map.on('click', onMapClickIfNotLoading);
 
 $(window).bind("load",function(){
   last_moved_marker = 1;
