@@ -204,11 +204,9 @@ function calculateSunriseSunsetTimes(m){
       var dawndiff = Math.abs(results['dawn'][results['dawn'].length - 1] - results['dawn'][results['dawn'].length - 2]);
       var duskdiff = Math.abs(results['dusk'][results['dusk'].length - 1] - results['dusk'][results['dusk'].length - 2]);
       if (dawndiff > 10 && results['dawn'][results['dawn'].length - 2] !== null) {
-        console.log( results['dawn'].length - 1  + ' set to null, because the diff is ' + duskdiff + ' orgiginal value was ' + results['dawn'][results['dawn'].length - 1]);
         results['dawn'][results['dawn'].length - 2] = null;
       }
       if (duskdiff > 10 && results['dusk'][results['dusk'].length - 2] !== null) {
-        console.log( results['dusk'].length - 1  + ' set to null, because the diff is ' + duskdiff + ' orgiginal value was ' + results['dusk'][results['dusk'].length - 1]);
         results['dusk'][results['dusk'].length - 2] = null;
       }
       
@@ -387,7 +385,6 @@ L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ', {
 
 
 function onMapClick(e){
-  console.log(last_moved_marker);
   if (last_moved_marker == 0) {
     if (markers[1]["marker"]) {
       map.removeLayer(markers[1]["marker"]);
