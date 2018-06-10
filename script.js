@@ -64,8 +64,10 @@ function getTimeZoneData(lat, lng, marker){
 function onTZAjaxError(){
   $("#error").text('It looks like we could not get the time zone information of the location. '+
     'This might happen when too many people are looking at the page at the same time or you clicked on a very remote area. '+
-    'Please try again in a moment or try a different location.');
+    'Please try again in a moment or try a different location. ');
   $("#error").slideDown()
+  isLoading = false;
+  loadingCleanUp();
 }
 
 function onTZAjaxSuccess(data, marker){
@@ -288,10 +290,11 @@ function onNominatimAjaxSuccess(data, marker, lat, lng){
 }
 
 function onNomiatimAjaxError(){
-  $("#error").text('It looks like we could not get information about the location you picked.'+
-    'This might happen when too many people are looking at the page at the same time.'+
+  $("#error").text('It looks like we could not get information about the location you picked. '+
+    'This might happen when too many people are looking at the page at the same time. '+
     'Please try again in a moment.');
   $('#error').slideDown();
+  isLoading = false;
   loadingCleanUp();
 }
 
