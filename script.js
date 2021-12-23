@@ -107,8 +107,11 @@ function processTimeZoneData(marker){
     // this means that there is daylight savings time at this location
     // note: this is actually the "winter" time, so not the daylight savings
     // time on the Southern hemisphere, but the math works out
-    markers[marker]["dstStart"] = new Date(tzinfo["dstStart"] * 1000).toISOString().substring(5,10);
-    markers[marker]["dstEnd"] = new Date(tzinfo["dstEnd"] * 1000).toISOString().substring(5,10);
+
+    // nb. these had to be changed to "zoneStart" and "zoneEnd" because timezonedb 
+    // has changed ther api breaking the previous code
+    markers[marker]["dstStart"] = new Date(tzinfo["zoneStart"] * 1000).toISOString().substring(5,10);
+    markers[marker]["dstEnd"] = new Date(tzinfo["zoneEnd"] * 1000).toISOString().substring(5,10);
 
 
 
