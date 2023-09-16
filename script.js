@@ -247,7 +247,7 @@ function getNominatimData(lat, lng, marker){
   var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+lat+"&lon="+lng+"&zoom=18&addressdetails=1&accept-language=en";
   isLoading = true;
   $.ajax({
-    type:"POST",
+    type:"GET",
     url:url,
     success: function(data) {
         if (!data["error"]) {
