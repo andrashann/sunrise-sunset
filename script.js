@@ -1,3 +1,19 @@
+$(function () {
+  // Initialize all popovers
+  $('[data-toggle="popover"], [data-bs-toggle="popover"]').popover({
+    container: 'body'
+  });
+
+  // Hide popover when clicking outside
+  $(document).on('click', function (e) {
+    $('[data-toggle="popover"], [data-bs-toggle="popover"]').each(function () {
+      if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        $(this).popover('hide');
+      }
+    });
+  });
+});
+
 let markers = {0:{}, 1:{}};
 
 //-----------------------------------------
@@ -250,10 +266,11 @@ function getNominatimData(lat, lng, marker){
     type:"GET",
     url:url,
     success: function(data) {
+        console.log(data);  
         if (!data["error"]) {
           onNominatimAjaxSuccess(data, marker, lat, lng);
         } else {
-          onNomiatimAjaxError();
+          onNominatimAjaxSuccess({address: {}}, marker, lat, lng);
         }
     },
     error: function (xhr, ajaxOptions, thrownError) {
@@ -269,11 +286,13 @@ function getNominatimData(lat, lng, marker){
 }
 
 function onNominatimAjaxSuccess(data, marker, lat, lng){
-  var location = '[unknown location]';
+  var location = lat.toFixed(5) + ", " + lng.toFixed(5);
+  var connectingWord = "at";
   var locationParts = ["city", "town", "village", "county", "state", "country"];
   locationParts.some(function(element){
     if (data["address"][element]){
       location = data["address"][element];
+      connectingWord = "in";
       return true;
     }
   });
@@ -282,9 +301,9 @@ function onNominatimAjaxSuccess(data, marker, lat, lng){
                 location);
   markers[marker]["location"] = location;
   if (marker == 0){
-    chart.data.names({data1: 'Sunrise in ' + location, data2: 'Sunset in ' + location});
+    chart.data.names({data1: `Dawn ${connectingWord} ${location}`, data2: `Dusk ${connectingWord} ${location}`});
   } else {
-    chart.data.names({data3: 'Sunrise in ' + location, data4: 'Sunset in ' + location});
+    chart.data.names({data3: `Dusk ${connectingWord} ${location}`, data4: `Dusk ${connectingWord} ${location}`});
   }
 
   getTimeZoneData(lat, lng, marker);
@@ -380,8 +399,8 @@ var marker;
 var last_moved_marker = 0;
 
 var map = L.map('map').setView([49.525208, 11.953125], 5);
-L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+L.tileLayer('https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ', {
+    attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 7,
     id: 'osm.humanitarian',
 }).addTo(map);

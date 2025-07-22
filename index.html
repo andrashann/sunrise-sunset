@@ -11,15 +11,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />  
   
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.rawgit.com/mourner/suncalc/b08d1f6f/suncalc.js"></script>
   <script src="https://cdn.rawgit.com/datejs/Datejs/a7239957/build/date.js"></script>
 
@@ -54,8 +54,16 @@
         </p>
         <p>
           This page lets you compare the dawn/dusk pattern of two arbitrary locations: just click the map to move a marker to your desired location.
-          Hover over the graph to see exact dawn/dusk times.
+          Hover over the graph to see exact dawn/dusk times. 
+          <i 
+            class="bi bi-info-circle text-secondary icon-baseline" 
+            data-toggle="popover" 
+            data-html="true" 
+            data-trigger="click"
+            data-content="The graph shows dawn and dusk, not sunrise and sunset times. This is because even after the sun has set, the sky is still bright for a while, so it is not perceived as nighttime. In technical terms, I display the end of civil twilight. Read more <a href='https://www.timeanddate.com/astronomy/civil-twilight.html' target='_blank'>here</a>."
+          ></i>
         </p>
+        
 
     </div>
   </div>
