@@ -303,7 +303,7 @@ function onNominatimAjaxSuccess(data, marker, lat, lng){
   if (marker == 0){
     chart.data.names({data1: `Dawn ${connectingWord} ${location}`, data2: `Dusk ${connectingWord} ${location}`});
   } else {
-    chart.data.names({data3: `Dusk ${connectingWord} ${location}`, data4: `Dusk ${connectingWord} ${location}`});
+    chart.data.names({data3: `Dawn ${connectingWord} ${location}`, data4: `Dusk ${connectingWord} ${location}`});
   }
 
   getTimeZoneData(lat, lng, marker);
